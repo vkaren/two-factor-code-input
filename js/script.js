@@ -1,5 +1,12 @@
 const form = document.getElementById("form");
-function loadInputs() {
+let inputs;
+let submitButton;
+
+const validCode = "1973";
+let codeToValidate = [];
+let deleting = false;
+
+function load() {
   let i = 0;
   while (i < 4) {
     form.innerHTML += `
@@ -8,67 +15,83 @@ function loadInputs() {
     i++;
   }
   form.innerHTML += '<button type="submit" id="submit-button">Submit</button>';
+
+  inputs = Object.values(form.children).filter(
+    (element) => element.localName === "input"
+  );
+
+  submitButton = document.getElementById("submit-button");
+
+  inputs.forEach((element, i) => {
+    element.addEventListener("keyup", (event) => onInput(event, i));
+    if (i !== 0) {
+      element.disabled = true;
+    }
+  });
+  submitButton.disabled = true;
+  submitButton.addEventListener("click", sendCode);
 }
-loadInputs();
-
-const inputs = Object.values(form.children).filter(
-  (element) => element.localName === "input"
-);
-document.getElementById('submit-button').addEventListener('click', sendCode)
-const validCode = "1973";
-let codeToValidate = "";  //usar un object instead of a string ?? idk need to think about it
-
-inputs.forEach((element, i) => {
-  // element.addEventListener("input", (event) => onInput(event, i));
-  element.addEventListener("keyup", (event) => onInput(event, i));
-  if (i !== 0) {
-    element.disabled = true;
-  }
-});
 
 function onInput(event, indexInput) {
   const value = event.currentTarget.value;
-
   const keyPressed = event.key;
 
-  if (!isNaN(value - "")) {
-    if (keyPressed !== "Backspace") {
-      codeToValidate += value[value.length - 1];
+  if (!isNaN(value - "") && value.length <= 1) {
+    inputs[indexInput].classList.remove("error");
 
-      console.log(codeToValidate, "añadiendo");
+    if (keyPressed !== "Backspace") {
+      codeToValidate[indexInput] = value;
 
       if (inputs[indexInput + 1]) {
         inputs[indexInput + 1].disabled = false;
         inputs[indexInput + 1].focus();
-      }
-    } else if(keyPressed === "Backspace") {
-      let codePave =  codeToValidate
-      
-      if(validCode.length-codeToValidate.length  !== 1){
-         codeToValidate = codeToValidate.substring(0, codeToValidate.length - 1);
-         console.log(codePave,codeToValidate, "borrando");
-      } 
-      
-      if(codePave === codeToValidate){
-        if (inputs[indexInput - 1]) {
-          inputs[indexInput].disabled = true;
-          inputs[indexInput - 1].focus();
-        }
-        console.log(codePave,codeToValidate, "regresando");
+      } else {
+        submitButton.focus();
       }
 
-    } 
+      deleting = false;
 
-    console.log(codeToValidate);
-  }
-}
+    } else if (value.length === 0 && keyPressed === "Backspace") {
+      if (!deleting) {
+        codeToValidate[indexInput] = value;
+        deleting = true;
 
-function sendCode(event){
-  event.preventDefault()
+      } else if (inputs[indexInput - 1]) {
+        inputs[indexInput].disabled = true;
+        inputs[indexInput - 1].focus();
+        deleting = false;
+      }
+    }
 
-  if(codeToValidate=== validCode){
-    console.log("you're right mmgbo")
+    if (codeToValidate.join("").length === validCode.length) {
+      submitButton.disabled = false;
+    } else {
+      submitButton.disabled = true;
+    }
+
   } else {
-   console.log('nahh')
+    inputs[indexInput].classList.add("error");
+    submitButton.disabled = true;
   }
+
+  console.log(codeToValidate);
 }
+
+function sendCode(event) {
+  event.preventDefault();
+
+  inputs.forEach((input) => (input.value = ""));
+
+  codeToValidate = codeToValidate.join("");
+
+  if (codeToValidate === validCode) {
+    console.log("you're right mmgbo");
+    form.style.display = 'none'
+  } else {
+    console.log("nahh");
+    inputs.forEach(input =>  input.classList.add("error"))
+  }
+  codeToValidate = [];
+}
+
+load();
