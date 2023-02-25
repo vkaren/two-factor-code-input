@@ -7,20 +7,24 @@ let codeToValidate = [];
 let deleting = false;
 
 function load() {
-  document.getElementById('valid-code').innerText = validCode
+  form.innerHTML = `<label for="digit" class="inputs">
+  Valid code: <span id="valid-code"></span>
+  </label>
+  <div id="inputs"></div>`
 
   let i = 0;
   while (i < 4) {
-    form.innerHTML += `
+    form.lastChild.innerHTML += `
       <input type="text" name="digit" id="digit-${i + 1}" pattern="[0-9]">
       `;
     i++;
   }
   form.innerHTML += '<button type="submit" id="submit-button">Submit</button>';
 
-  inputs = Object.values(form.children).filter(
-    (element) => element.localName === "input"
-  );
+  document.getElementById('valid-code').innerText = validCode
+
+  
+  inputs = Object.values(document.getElementById('inputs').children)
 
   submitButton = document.getElementById("submit-button");
 
@@ -60,7 +64,7 @@ function onInput(event, indexInput) {
         codeToValidate[indexInput] = value;
         deleting = true;
         changeStateSubmitButton()
-        
+
       } else if (inputs[indexInput - 1]) {
         inputs[indexInput].disabled = true;
         inputs[indexInput - 1].focus();
@@ -78,19 +82,14 @@ function onInput(event, indexInput) {
 function sendCode(event) {
   event.preventDefault();
 
-  inputs.forEach((input) => (input.value = ""));
-
-  codeToValidate = codeToValidate.join("");
-
-  if (codeToValidate === validCode) {
+  if (codeToValidate.join("") === validCode) {
     form.style.display = 'none'
-    document.getElementById('code').style.display = 'none'
     document.getElementById('image-dog').style.display = 'block'
+    codeToValidate = [];
   } else {
-  
     inputs.forEach(input =>  input.classList.add("error"))
   }
-  codeToValidate = [];
+
 }
 
 function changeStateSubmitButton(){
