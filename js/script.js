@@ -2,11 +2,13 @@ const form = document.getElementById("form");
 let inputs;
 let submitButton;
 
-const validCode = "1973";
+const validCode = Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000 + '';
 let codeToValidate = [];
 let deleting = false;
 
 function load() {
+  document.getElementById('valid-code').innerText = validCode
+
   let i = 0;
   while (i < 4) {
     form.innerHTML += `
@@ -42,10 +44,12 @@ function onInput(event, indexInput) {
     if (keyPressed !== "Backspace") {
       codeToValidate[indexInput] = value;
 
+      changeStateSubmitButton()
       if (inputs[indexInput + 1]) {
         inputs[indexInput + 1].disabled = false;
         inputs[indexInput + 1].focus();
       } else {
+        
         submitButton.focus();
       }
 
@@ -55,7 +59,8 @@ function onInput(event, indexInput) {
       if (!deleting) {
         codeToValidate[indexInput] = value;
         deleting = true;
-
+        changeStateSubmitButton()
+        
       } else if (inputs[indexInput - 1]) {
         inputs[indexInput].disabled = true;
         inputs[indexInput - 1].focus();
@@ -63,18 +68,11 @@ function onInput(event, indexInput) {
       }
     }
 
-    if (codeToValidate.join("").length === validCode.length) {
-      submitButton.disabled = false;
-    } else {
-      submitButton.disabled = true;
-    }
-
   } else {
     inputs[indexInput].classList.add("error");
     submitButton.disabled = true;
   }
 
-  console.log(codeToValidate);
 }
 
 function sendCode(event) {
@@ -85,13 +83,22 @@ function sendCode(event) {
   codeToValidate = codeToValidate.join("");
 
   if (codeToValidate === validCode) {
-    console.log("you're right mmgbo");
     form.style.display = 'none'
+    document.getElementById('code').style.display = 'none'
+    document.getElementById('image-dog').style.display = 'block'
   } else {
-    console.log("nahh");
+  
     inputs.forEach(input =>  input.classList.add("error"))
   }
   codeToValidate = [];
+}
+
+function changeStateSubmitButton(){
+  if (codeToValidate.join("").length === validCode.length) {
+    submitButton.disabled = false;
+  } else {
+    submitButton.disabled = true;
+  }
 }
 
 load();
