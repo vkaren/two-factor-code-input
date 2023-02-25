@@ -16,7 +16,7 @@ const inputs = Object.values(form.children).filter(
 );
 document.getElementById('submit-button').addEventListener('click', sendCode)
 const validCode = "1973";
-let codeToValidate = "";
+let codeToValidate = "";  //usar un object instead of a string ?? idk need to think about it
 
 inputs.forEach((element, i) => {
   // element.addEventListener("input", (event) => onInput(event, i));
