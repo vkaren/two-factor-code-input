@@ -7,18 +7,19 @@ function loadInputs() {
       `;
     i++;
   }
-  form.innerHTML += '<button type="submit">Submit</button>';
+  form.innerHTML += '<button type="submit" id="submit-button">Submit</button>';
 }
 loadInputs();
 
 const inputs = Object.values(form.children).filter(
   (element) => element.localName === "input"
 );
+document.getElementById('submit-button').addEventListener('click', sendCode)
 const validCode = "1973";
 let codeToValidate = "";
 
 inputs.forEach((element, i) => {
-  element.addEventListener("input", (event) => onInput(event, i));
+  // element.addEventListener("input", (event) => onInput(event, i));
   element.addEventListener("keyup", (event) => onInput(event, i));
   if (i !== 0) {
     element.disabled = true;
@@ -29,32 +30,45 @@ function onInput(event, indexInput) {
   const value = event.currentTarget.value;
 
   const keyPressed = event.key;
-  console.log(event.type,value, keyPressed);
 
   if (!isNaN(value - "")) {
-    if (value.length !== 0 && keyPressed !== "Backspace" && event.type === 'input') {
-      codeToValidate +=  value[value.length-1];
-      console.log(codeToValidate, 'añadiendo');
+    if (keyPressed !== "Backspace") {
+      codeToValidate += value[value.length - 1];
+
+      console.log(codeToValidate, "añadiendo");
+
       if (inputs[indexInput + 1]) {
         inputs[indexInput + 1].disabled = false;
         inputs[indexInput + 1].focus();
       }
-    }
-    
-    if(keyPressed === "Backspace"){
-       
-       if (value.length === 0 ) {
+    } else if(keyPressed === "Backspace") {
+      let codePave =  codeToValidate
       
-      if (inputs[indexInput - 1]) {
-        inputs[indexInput].disabled = true;
-        inputs[indexInput - 1].focus();
+      if(validCode.length-codeToValidate.length  !== 1){
+         codeToValidate = codeToValidate.substring(0, codeToValidate.length - 1);
+         console.log(codePave,codeToValidate, "borrando");
+      } 
+      
+      if(codePave === codeToValidate){
+        if (inputs[indexInput - 1]) {
+          inputs[indexInput].disabled = true;
+          inputs[indexInput - 1].focus();
+        }
+        console.log(codePave,codeToValidate, "regresando");
       }
-    }  else {
-        codeToValidate = codeToValidate.substring(0,codeToValidate.length-1);
-        console.log(codeToValidate, 'borrando');
-    }
-    }
-   
+
+    } 
+
     console.log(codeToValidate);
+  }
+}
+
+function sendCode(event){
+  event.preventDefault()
+
+  if(codeToValidate=== validCode){
+    console.log("you're right mmgbo")
+  } else {
+   console.log('nahh')
   }
 }
