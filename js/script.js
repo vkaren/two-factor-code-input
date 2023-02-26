@@ -26,6 +26,7 @@ function load() {
 
   inputs.forEach((input, i) => {
     input.addEventListener("keyup", (event) => onInput(event, i));
+    input.addEventListener("paste", (event) => onPaste(event, i));
     if (i !== 0) {
       input.disabled = true;
     }
@@ -63,6 +64,29 @@ function onInput(event, indexInput) {
     inputs[indexInput].classList.add("error");
     submitButton.disabled = true;
   }
+}
+
+function onPaste(event, indexInput){
+  event.preventDefault()
+
+  if(indexInput === 0){
+      const paste = (event.clipboardData || window.clipboardData).getData("text")
+      if(paste.length < validCode.length){
+        codeToValidate = []
+
+        paste.split('').forEach((digit, i) => {
+          inputs[i].value = digit
+          inputs[i].classList.remove('error')
+          inputs[i].disabled = false
+          inputs[i].focus()
+          codeToValidate.push(digit)
+        })
+        
+        changeState()
+      }
+   } else {
+    return
+   }
 }
 
 function changeState(indexInput, value) {
