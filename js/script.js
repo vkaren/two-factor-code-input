@@ -4,7 +4,7 @@ let submitButton;
 
 const validCode = Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000 + "";
 let codeToValidate = [];
-let deleting = false;
+let deletingInput = false;
 
 function load() {
   form.innerHTML = `<label for="digit">
@@ -13,12 +13,11 @@ function load() {
                    <div id="inputs"></div>
                    <button type="submit" id="submit-button">Send code</button>`;
 
-  let i = 0;
-  while (i < 4) {
+  for (let i = 0; i < 4; i++) {
     document.getElementById("inputs").innerHTML += `
-      <input type="text" name="digit" id="digit-${i + 1}" pattern="[0-9]">
-      `;
-    i++;
+    <input type="text" name="digit" id="digit-${i + 1}" 
+     pattern="[0-9]" minlength="1" maxlength="1">
+    `;
   }
 
   inputs = Object.values(document.getElementById("inputs").children);
@@ -35,67 +34,69 @@ function load() {
   submitButton.addEventListener("click", sendCode);
 }
 
-function onInput(event, indexInput) {
-  const value = event.currentTarget.value;
-  const keyPressed = event.key;
-
-  if (!isNaN(value - "") && value.length <= 1) {
-    inputs[indexInput].classList.remove("error");
-
-    if (keyPressed !== "Backspace") {
-      changeState(indexInput, value);
-
-      if (inputs[indexInput + 1]) {
-        inputs[indexInput + 1].disabled = false;
-        inputs[indexInput + 1].focus();
-      } else {
-        submitButton.focus();
-      }
-    } else if (keyPressed === "Backspace" && value.length === 0) {
-      if (!deleting) {
-        changeState(indexInput, value);
-      } else if (inputs[indexInput - 1]) {
-        inputs[indexInput].disabled = true;
-        inputs[indexInput - 1].focus();
-        deleting = false;
-      }
-    }
-  } else {
-    inputs[indexInput].classList.add("error");
-    submitButton.disabled = true;
-  }
-}
-
-function onPaste(event, indexInput){
-  event.preventDefault()
-
-  if(indexInput === 0){
-      const paste = (event.clipboardData || window.clipboardData).getData("text")
-      if(paste.length < validCode.length){
-        codeToValidate = []
-
-        paste.split('').forEach((digit, i) => {
-          inputs[i].value = digit
-          inputs[i].classList.remove('error')
-          inputs[i].disabled = false
-          inputs[i].focus()
-          codeToValidate.push(digit)
-        })
-        
-        changeState()
-      }
-   } else {
-    return
-   }
-}
-
-function changeState(indexInput, value) {
-  codeToValidate[indexInput] = value;
-  deleting = !deleting;
+function update(index, value) {
+  codeToValidate[index] = value;
+  deletingInput = !deletingInput;
   if (codeToValidate.join("").length === validCode.length) {
     submitButton.disabled = false;
   } else {
     submitButton.disabled = true;
+  }
+}
+
+function onInput(event, index) {
+  const value = event.currentTarget.value;
+  const keyPressed = event.key;
+
+  if (!isNaN(value - "")) {
+    inputs[index].classList.remove("error");
+
+    if (keyPressed !== "Backspace") {
+      update(index, value);
+
+      if (inputs[index + 1]) {
+        inputs[index + 1].disabled = false;
+        inputs[index + 1].focus();
+      } 
+
+    } else {
+      if (!deletingInput) {
+        update(index, value);
+      } else {
+        if (inputs[index - 1]) {
+          inputs[index - 1].focus();
+          deletingInput = false;
+        }
+      }
+    }
+  } else {
+    inputs[index].classList.add("error");
+    submitButton.disabled = true;
+  }
+}
+
+function onPaste(event, index) {
+  event.preventDefault();
+
+  if (index === 0) {
+    const paste = (event.clipboardData || window.clipboardData).getData("text");
+
+    if (paste.length <= inputs.length) {
+      codeToValidate = [];
+
+      inputs.forEach((input) => (input.value = ""));
+
+      paste.split("").forEach((digit, i) => {
+        inputs[i].classList.remove("error");
+        inputs[i].disabled = false;
+        inputs[i].focus();
+        inputs[i].value = digit;
+
+        codeToValidate.push(digit);
+      });
+
+      update();
+    }
   }
 }
 
@@ -104,8 +105,7 @@ function sendCode(event) {
 
   if (codeToValidate.join("") === validCode) {
     form.style.display = "none";
-    document.getElementById("image-dog").style.display = "block";
-    codeToValidate = [];
+    document.getElementById("image-dog").classList.add('visible');
   } else {
     inputs.forEach((input) => input.classList.add("error"));
   }

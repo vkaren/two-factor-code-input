@@ -7,7 +7,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #f2921d;
+  background: #f79824;
   font-family: "Montserrat", sans-serif;
 }
 main {
@@ -53,22 +53,59 @@ input[type="text"]:disabled,
 input[type="text"].error {
   background: #ff8888;
   border: 2px solid #ce1010;
+  animation: error-shake .3s ease-out;
 }
 #submit-button {
   width: 30%;
-  font-size: 1em;
+  font-size: 1.1em;
   padding: 0.5em;
   border-radius: 20px;
   border: none;
-  background: #68fa3c;
+  background: #2a75d8;
   color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+#submit-button:hover{
+  background: #2f7fe9;
+}
+#submit-button:active{
+  background: #2a75d8;
 }
 #image-dog {
   display: none;
-  width: 50vw;
+  width: 40vw;
+}
+#image-dog.visible{
+  display: block;
+  animation: perrito 1s linear;
 }
 img {
   width: 100%;
+}
+
+@keyframes error-shake {
+  0%{
+    transform: translateX(0px);
+  }
+  50%{
+    transform: translateX(5px);
+  }
+  75%{
+    transform: translateX(0px);
+  }
+  100%{
+    transform: translateX(5px);
+  }
+}
+
+@keyframes perrito {
+  0%{
+    transform: scale(0);
+  }
+  100%{
+    transform: scale(1);
+  }
 }
 
 @media (max-width: 600px) {
