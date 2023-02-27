@@ -103,6 +103,8 @@ function onPaste(event, index) {
 function sendCode(event) {
   event.preventDefault();
 
+  submitButton.focus()
+
   if (codeToValidate.join("") === validCode) {
     form.style.display = "none";
     document.getElementById("image-dog").classList.add('visible');
