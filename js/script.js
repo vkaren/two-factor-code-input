@@ -16,7 +16,7 @@ function load() {
   for (let i = 0; i < 4; i++) {
     document.getElementById("inputs").innerHTML += `
     <input type="text" name="digit" id="digit-${i + 1}" 
-     pattern="[0-9]" minlength="1" maxlength="1">
+     pattern="[0-9]" minlength="1" maxlength="1" inputmode="numeric">
     `;
   }
 
