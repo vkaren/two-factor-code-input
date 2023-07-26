@@ -1,0 +1,10 @@
+/*     Message section     */
+.message_img {
+  width: 12rem;
+  height: 12rem;
+  margin: 0 auto;
+  margin-top: 3rem;
+  border-radius: 50%;
+  background: url("../assets/images/dog.jpg");
+  background-size: cover;
+}

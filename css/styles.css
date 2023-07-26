@@ -1,0 +1,102 @@
+:root {
+  --green: #2e9e53;
+  --light-green: #beebb7;
+  --electric-green: #4bd235;
+  --blue: #1a9ce5;
+  --black: #1d1d1d;
+  --gray: #eaeaea;
+  --white: #ffffff;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("../assets/fonts/Montserrat-Regular.woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("../assets/fonts/Montserrat-Medium.woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("../assets/fonts/Montserrat-Bold.woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: "Montserrat", sans-serif;
+}
+
+body {
+  color: var(--black);
+  background: var(--light-green);
+}
+
+main {
+  position: relative;
+  min-height: 100vh;
+}
+
+section {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 40vw;
+  max-width: 40rem;
+  min-width: 35rem;
+  height: fit-content;
+  padding: 5rem 0;
+  margin: auto;
+  border-radius: 15px;
+  box-shadow: 4px 4px 13px 0px rgba(88, 153, 78, 0.65);
+  -webkit-box-shadow: 4px 4px 13px 0px rgba(88, 153, 78, 0.65);
+  -moz-box-shadow: 4px 4px 13px 0px rgba(88, 153, 78, 0.65);
+  background: var(--white);
+}
+
+h1 {
+  font-size: 2.2rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+button {
+  font-weight: 700;
+  font-family: "Montserrat", sans-serif;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+button:active {
+  opacity: 1;
+}
+
+img {
+  max-width: 100%;
+  min-width: 100%;
+}
+
+.hidden {
+  opacity: 0;
+  z-index: -1000;
+}

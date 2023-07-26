@@ -4,6 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="./css/two-factor-code.css" />
+    <link
+      rel="preload"
+      href="./css/message.css"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript>
+      <link rel="stylesheet" href="./css/message.css" />
+    </noscript>
     <title>Two factor code input</title>
   </head>
   <body>
@@ -12,58 +22,66 @@
         <h1>Enter verification code</h1>
 
         <form>
-          <input
-            type="text"
-            name="digit"
-            id="digit-1"
-            pattern="[0-9]"
-            minlength="1"
-            maxlength="1"
-            inputmode="numeric"
-          />
-          <input
-            type="text"
-            name="digit"
-            id="digit-2"
-            pattern="[0-9]"
-            minlength="1"
-            maxlength="1"
-            inputmode="numeric"
-          />
-          <input
-            type="text"
-            name="digit"
-            id="digit-3"
-            pattern="[0-9]"
-            minlength="1"
-            maxlength="1"
-            inputmode="numeric"
-          />
-          <input
-            type="text"
-            name="digit"
-            id="digit-4"
-            pattern="[0-9]"
-            minlength="1"
-            maxlength="1"
-            inputmode="numeric"
-          />
+          <div class="twc_inputs">
+            <input
+              type="text"
+              name="digit"
+              class="twc_input-code"
+              id="digit-1"
+              pattern="[0-9]"
+              minlength="1"
+              maxlength="1"
+              inputmode="numeric"
+              aria-label="first digit"
+            />
+            <input
+              type="text"
+              name="digit"
+              class="twc_input-code"
+              id="digit-2"
+              pattern="[0-9]"
+              minlength="1"
+              maxlength="1"
+              inputmode="numeric"
+              aria-label="second digit"
+            />
+            <input
+              type="text"
+              name="digit"
+              class="twc_input-code"
+              id="digit-3"
+              pattern="[0-9]"
+              minlength="1"
+              maxlength="1"
+              inputmode="numeric"
+              aria-label="third digit"
+            />
+            <input
+              type="text"
+              name="digit"
+              class="twc_input-code"
+              id="digit-4"
+              pattern="[0-9]"
+              minlength="1"
+              maxlength="1"
+              inputmode="numeric"
+              aria-label="four digit"
+            />
+          </div>
 
           <button class="twc_verify-btn">Verify</button>
 
           <div class="twc_see-valid-code">
             <button class="see-valid-code_btn">See valid code</button>
-            <span class="valid-code">1234</span>
+            <span class="valid-code hidden">1234</span>
           </div>
         </form>
       </section>
 
-      <section class="message_section">
+      <section class="message_section hidden">
         <h1>Heyyy!!!</h1>
 
-        <div class="message_img">
-          <img src="./assets/dog.jpg" alt="Cute dog" />
-        </div>
+        <div class="message_img"></div>
       </section>
     </main>
     <script src="./js/index.js"></script>
