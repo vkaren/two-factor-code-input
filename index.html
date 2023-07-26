@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/styles.css" />
+    <title>Two factor code input</title>
+  </head>
+  <body>
+    <main>
+      <section class="two-factor-code_section">
+        <h1>Enter verification code</h1>
+
+        <form>
+          <input
+            type="text"
+            name="digit"
+            id="digit-1"
+            pattern="[0-9]"
+            minlength="1"
+            maxlength="1"
+            inputmode="numeric"
+          />
+          <input
+            type="text"
+            name="digit"
+            id="digit-2"
+            pattern="[0-9]"
+            minlength="1"
+            maxlength="1"
+            inputmode="numeric"
+          />
+          <input
+            type="text"
+            name="digit"
+            id="digit-3"
+            pattern="[0-9]"
+            minlength="1"
+            maxlength="1"
+            inputmode="numeric"
+          />
+          <input
+            type="text"
+            name="digit"
+            id="digit-4"
+            pattern="[0-9]"
+            minlength="1"
+            maxlength="1"
+            inputmode="numeric"
+          />
+
+          <button class="twc_verify-btn">Verify</button>
+
+          <div class="twc_see-valid-code">
+            <button class="see-valid-code_btn">See valid code</button>
+            <span class="valid-code">1234</span>
+          </div>
+        </form>
+      </section>
+
+      <section class="message_section">
+        <h1>Heyyy!!!</h1>
+
+        <div class="message_img">
+          <img src="./assets/dog.jpg" alt="Cute dog" />
+        </div>
+      </section>
+    </main>
+    <script src="./js/index.js"></script>
+  </body>
+</html>
