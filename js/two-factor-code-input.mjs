@@ -1,5 +1,5 @@
 export default function TwoFactorCodeInput(inputs) {
-  this.validCode = Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000 + "";
+  this.validCode = this.getValidCode();
   this.codeToValidate = [];
   this.isDeleting = false;
   this.inputs = inputs;
@@ -95,7 +95,14 @@ TwoFactorCodeInput.prototype.onPasteCode = function (e) {
 };
 
 TwoFactorCodeInput.prototype.getValidCode = function () {
-  return this.validCode;
+  const maxValidCode = Math.pow(10, this.inputs.length) - 1;
+  const minValidCode = Math.pow(10, this.inputs.length - 1);
+
+  const validCode =
+    Math.floor(Math.random() * (maxValidCode - minValidCode + 1)) +
+    minValidCode;
+
+  return validCode;
 };
 
 TwoFactorCodeInput.prototype.validateCode = function () {

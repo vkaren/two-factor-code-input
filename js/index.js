@@ -10,13 +10,13 @@ const validCodeElem = document.querySelector(".valid-code");
 
 const app = new TwoFactorCodeInput(inputs);
 
-seeValidCodeBtn.addEventListener("click", onSeeValidCode);
+seeValidCodeBtn.addEventListener("click", seeValidCode);
 validateCodeBtn.addEventListener("click", onValidateCode);
 
-function onSeeValidCode(e) {
+function seeValidCode(e) {
   e.preventDefault();
 
-  validCodeElem.textContent = app.getValidCode();
+  validCodeElem.textContent = app.validCode;
   seeValidCodeBtn.classList.add("hidden");
   validCodeElem.classList.remove("hidden");
 
