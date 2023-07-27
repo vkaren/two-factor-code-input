@@ -5,6 +5,7 @@
   margin: 0 auto;
   margin-top: 3rem;
   border-radius: 50%;
+  border: 2px solid var(--purple);
   background: url("../assets/images/dog.jpg");
   background-size: cover;
 }

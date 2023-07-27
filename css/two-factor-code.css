@@ -23,12 +23,12 @@ form {
   height: 4rem;
   text-align: center;
   border-radius: 5px;
-  border: 1px solid var(--electric-green);
-  background: var(--gray);
+  border: 1px solid var(--gray);
+  background: var(--light-gray);
 }
 
 .twc_input-code.error {
-  border: 2px solid #f16d6d;
+  border: 2px solid var(--red);
   animation: error-shake 0.3s ease-out 2;
 }
 /*    Form verify code button   */
@@ -37,7 +37,7 @@ form {
   height: 4rem;
   color: var(--white);
   border: none;
-  background: var(--green);
+  background: var(--purple);
 }
 
 /*    Form valid code container   */
@@ -52,7 +52,7 @@ form {
   left: 8%;
   z-index: 10;
   text-decoration: underline;
-  color: var(--blue);
+  color: var(--fuchsia);
   border: none;
   background: transparent;
 }
@@ -64,7 +64,7 @@ form {
   font-size: 1.4rem;
   font-weight: 700;
   letter-spacing: 2px;
-  color: var(--blue);
+  color: var(--fuchsia);
 }
 
 @keyframes error-shake {

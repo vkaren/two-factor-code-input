@@ -1,10 +1,11 @@
 :root {
-  --green: #2e9e53;
-  --light-green: #beebb7;
-  --electric-green: #4bd235;
-  --blue: #1a9ce5;
+  --green: #61dda1;
+  --purple: #2a4cc7;
+  --fuchsia: #9c19a8;
+  --red: #f16d6d;
   --black: #1d1d1d;
-  --gray: #eaeaea;
+  --gray: #a0a0a0;
+  --light-gray: #eaeaea;
   --white: #ffffff;
 }
 
@@ -43,7 +44,7 @@ html {
 
 body {
   color: var(--black);
-  background: var(--light-green);
+  background: var(--green);
 }
 
 main {
@@ -57,16 +58,14 @@ section {
   left: 0;
   bottom: 0;
   right: 0;
-  width: 40vw;
+  width: 65vw;
   max-width: 40rem;
-  min-width: 35rem;
+  min-width: 31rem;
   height: fit-content;
   padding: 5rem 0;
   margin: auto;
   border-radius: 15px;
-  box-shadow: 4px 4px 13px 0px rgba(88, 153, 78, 0.65);
-  -webkit-box-shadow: 4px 4px 13px 0px rgba(88, 153, 78, 0.65);
-  -moz-box-shadow: 4px 4px 13px 0px rgba(88, 153, 78, 0.65);
+  border: 1px solid var(--black);
   background: var(--white);
 }
 
