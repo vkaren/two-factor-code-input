@@ -1,8 +1,8 @@
 export default function TwoFactorCodeInput(inputs) {
+  this.inputs = inputs;
   this.validCode = this.getValidCode();
   this.codeToValidate = [];
   this.isDeleting = false;
-  this.inputs = inputs;
 
   this.inputs.forEach((input) => {
     input.addEventListener("input", this.onInputCode.bind(this));
