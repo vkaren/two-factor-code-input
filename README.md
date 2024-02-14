@@ -1,12 +1,12 @@
 ## Two factor code input
 
-This is a 4-digit security code input app that allows enter a two-factor authorization code.
+This application facilitates the input of a 4-digit security code for two-factor authorization.
 
  <img src='./readme_imgs/app.png' width='300px'>
 
-## How works?
+## How it works?
 
-The app works with a constructor function TwoFactorCodeInput, which expects the inputs from the app, to add event listeners to them, manipulate them and get a random valid code based on the number of inputs.
+The app works with a constructor function TwoFactorCodeInput, which expects the inputs from the app, to add event listeners, manipulate them and generates a random valid code based on the number of inputs.
 
 _js/two-factor-code-input.mjs_
 
@@ -14,7 +14,7 @@ _js/two-factor-code-input.mjs_
 
  <img src='./readme_imgs/getValidCode.PNG' width='500px'>
 
-When the user enters the code, the onInput function is invoked by two events: input and keyup. The keyup event is to know if the Backspace key is pressed, that will mean the user is deleting the input values or going back to the previous input. If the input value is a number onEnterDigit is invoked to update the codeToValidate property and focus on the next input if there is one.
+When a user enters a code, the onInput function is triggered by two events: input and keyup. The keyup event detects if the Backspace key is pressed, indicating input deletion or navigation to the previous input. If the input value is a number, onEnterDigit is called to update the codeToValidate property and focus on the next input if available.
 
  <img src='./readme_imgs/onInput.PNG' width='500px'>
 
@@ -22,15 +22,15 @@ When the user enters the code, the onInput function is invoked by two events: in
 
  <img src='./readme_imgs/onBackspace.PNG' width='500px'>
 
-The user can paste the code but only if it is in the first input and the length of the pasted code is equal to or less than the number of inputs. Depending on this lenght, the next or the last input will be focused.
+Users can paste a code, but only in the first input and if the length of the pasted code is equal to or less than the number of inputs. Depending on the length, the next or the last input will be focused.
 
  <img src='./readme_imgs/onPaste.PNG' width='500px'>
 
-When the user clicks the verify button, the validateCode function will see if the valid code and the entered code are the same.
+When the user clicks the verify button,the validateCode function compares the valid code with the entered code.
 
  <img src='./readme_imgs/validate.PNG' width='500px'>
 
-A plus: the user can see the valid code and depending on the validation they could receive a message or see an error animation.
+Additionally, users can view the valid code, and based on the validation outcome, they may receive a message or observe an error animation.
 
 _js/index.js_
 
